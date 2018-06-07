@@ -30,7 +30,7 @@ Floret requires __node v8.x__ or higher.
 Floret microservice require Kong API gateway.  [See here](#kong-install) for container-based deployment instructions.
 
 ```
-$ npm install floret
+$ npm i floret
 ```
 
 # Getting Started by Example
@@ -94,7 +94,7 @@ module.exports = (app) => {
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "floret": "file:///Users/clibro/work/project/floret/repos/floret"
+    "floret": "^1.0.0"
   }
 }
 ```
