@@ -1,7 +1,7 @@
 {
   "name": "floret",
   "version": "1.0.0",
-  "description": "Reactive MicroService Framework",
+  "description": "Microservice Framework for Node",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/Acxiom/floret.git"
   },
-  "author": "Clint Brown",
+  "author": "Clint Brown <clint.brown.atx@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
     "ip": "^1.1.5",
@@ -38,5 +38,6 @@
     "nyc": "^11.4.1",
     "sinon": "^2.3.5",
     "supertest": "^3.0.0"
-  }
+  },
+  "keywords": ["microservice", "pub", "sub", "event", "driven", "choreograph"]
 }
