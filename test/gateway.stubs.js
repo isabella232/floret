@@ -64,32 +64,78 @@ sinon.stub(floret.gateway,'register').resolves(() =>{
         console.log('discoverAllChannels stub called')
     });
 */
+    sinon.stub(floret.gateway, 'createNewRoute').callsFake((obj) => {
+        console.log('createNewRoute stub called')
+
+        return [{
+            "host": "192.168.1.68",
+            "created_at": 1534218595,
+            "connect_timeout": 60000,
+            "id": "9c00be92-7ae8-4748-bd06-routeIdMock",
+            "protocol": "http",
+            "name": "mock-floret",
+            "read_timeout": 60000,
+            "port": 8082,
+            "path": "/",
+            "updated_at": 1534218595,
+            "retries": 5,
+            "write_timeout": 60000,
+            "service": {
+                "id": "9c00be92-7ae8-4748-bd06-serviceIdMock"
+            }
+        }]
+    });
+
+    sinon.stub(floret.gateway, 'getServiceByName').callsFake((obj) => {
+        console.log('getServiceByName stub called')
+
+        return {
+            "host": "192.168.1.68",
+            "created_at": 1534218595,
+            "connect_timeout": 60000,
+            "id": "9c00be92-7ae8-4748-bd06-serviceIdMock",
+            "protocol": "http",
+            "name": "mock-floret",
+            "read_timeout": 60000,
+            "port": 8082,
+            "path": "/",
+            "updated_at": 1534218595,
+            "retries": 5,
+            "write_timeout": 60000
+
+        }
+    });
+
+    sinon.stub(floret.gateway,'subscribe').callsFake(() =>{
+        console.log('subscribe stub called')
+        return [];
+    });
 
     sinon.stub(floret.gateway,'discoverChannels').callsFake(() =>{
         console.log('discoverChannels stub called')
         return [];
     });
 
-sinon.stub(floret.gateway,'getAPIs').resolves({"data": [
-        {
-            "name": "api1"
-        },
-        {
-            "name": "api2"
-        }]}
-);
+    sinon.stub(floret.gateway,'getAPIs').resolves({"data": [
+            {
+                "name": "api1"
+            },
+            {
+                "name": "api2"
+            }]}
+    );
 
-sinon.stub(floret.gateway,'getAPI').callsFake((name) =>{
-    console.log('getAPI stub called ' + name)
+    sinon.stub(floret.gateway,'getAPI').callsFake((name) => {
 
-    if (!name) {
+        if (!name) {
 
-        throw new Error('bad api request');
-    }
-    return {
-        "name": name
-    }
-});
+            throw new Error('bad api request');
+        }
+        return {
+            "name": name
+        }
+    });
+
     sinon.stub(floret.gateway,'discoverAPISpecs').callsFake(() =>{
         console.log('apispecs stub')
         return [{"name": "apiSpec1"}];

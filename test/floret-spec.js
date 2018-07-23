@@ -29,20 +29,19 @@ describe('Floret', () => {
         serviceURI = "/unit-test-floret";
 
     let config = {
-        "name": serviceName,
-        "port": servicePort,
-        "uri": serviceURI,
-        "host": serviceHost,
-        "root": "../",
-        "environments": {
-            local:
-                {
-                    gatewayHost: gatewayHost,
-                    gatewayProxyPort: gatewayProxyPort,
-                    gatewayAdminPort: gatewayAdminPort
-                }
-        },
-        publishDocs: true
+        name: serviceName,
+        port: servicePort,
+        uri: serviceURI,
+        host: serviceHost,
+        root: "../",
+        publishDocs: true,
+        gatewayHost,
+        gatewayProxyPort,
+        gatewayAdminPort,
+        disconnected: false,
+        apis : [],
+        channel: [],
+        subscriptions: []
     };
 
     let floretConfig = new floret.Config(config);
@@ -224,14 +223,11 @@ describe('Floret', () => {
             };
             rpSpy = sinon.spy(handlerFn);
 
-            testChannel = new floret.Channel(
-                {
+            testChannel = new floret.Channel({
                     "name": "channel-test",
                     "description": "channel for : " + testName,
                     "endpoint": `${floret.url}/${testName}`,
                     "serviceName": floret.name,
-                    "hostURL": floret.host,
-                    "hostPort": floret.port,
                     "uri": "/events/" + testName
                 }, handlerFn
             );
@@ -244,7 +240,7 @@ describe('Floret', () => {
             let res = await
                 request
                     .post(floret.baseURI + '/subscribe')
-                    .send({ name: 'testSubscriber', url: floret.baseURI + '/test', channel: "channel-test" })
+                    .send({ name: 'testSubscriber', url: floret.baseURI + '/test', channel: "channel-test" , service: "mock-floret"})
 
 
             let key = JSON.parse(res.text).name;
@@ -348,20 +344,6 @@ describe('Floret', () => {
             assert.isObject(res);
         });
 
-
-        it('should create a subscription api', () => {
-            expect(async () => await script.createSubscriptionAPI()).to.not.throw();
-        });
-
-        it('should return subscription url', () => {
-            assert
-                .isString(script.subscriptionURL);
-            console.log('script.subscriptionURL ' + script.subscriptionURL)
-
-
-
-        });
-
         it('should have a setter for observable', async () => {
             let subject = new Rx.Subject();
             // set a new observable
@@ -384,7 +366,6 @@ describe('Floret', () => {
         });
 
         it('should have a setter for uri', () =>{
-            console.log('original script uri ' + script.uri)
             let oldUri = script.uri;
             script.uri = "/unit-test-floret/subscription/newUri";
             assert(script.uri !== oldUri);
@@ -402,7 +383,6 @@ describe('Floret', () => {
             await script.createSubscriptionEndpoint();
 
             let onIncoming = (msg) => {
-                console.log('Sub observed change')
                 assert.isObject(msg);
                 return msg;
             };
@@ -416,10 +396,6 @@ describe('Floret', () => {
                 .expect(200);
             sub.unsubscribe();
 
-        });
-
-        it('should return a gateway', () =>{
-            assert.isObject(script.gateway);
         });
 
         it('should return a service', () =>{
@@ -455,24 +431,22 @@ describe('Floret', () => {
                     }
                 );
 
-                console.log('adding new id channel')
                 await floret.addChannel(testChannel);
                 channel = floret.channels[testName];
 
                 let res = await
                     request
                         .post(floret.baseURI + '/subscribe')
-                        .send({ name: 'testSubscriber', url: floret.baseURI + '/test', channel: "channel-test" })
-
+                        .send({ name: 'testSubscriber', url: floret.baseURI + '/test', channel: "channel-test" , service: "mock-floret"})
 
                 subKey = JSON.parse(res.text).name;
                 sub = floret.channels['channel-test'].subscribers[subKey];
         });
 
         it('should return Subscriber class', () =>{
-            let subClass = floret.Subscriber;
-            let newSub = new subClass('classTest', floret.baseURI + '/test');
-            assert.instanceOf(newSub, subClass);
+            let Sub = floret.Subscriber;
+            let newSub = new Sub('mockSub', 'mock-floret', floret.baseURI + '/test');
+            assert.instanceOf(newSub, Sub);
         });
 
         it('should have an observer' , () => {
