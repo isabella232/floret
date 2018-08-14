@@ -1,7 +1,7 @@
 {
   "name": "floret",
-  "version": "1.0.0",
-  "description": "Microservice Framework for Node",
+  "version": "1.0.1",
+  "description": "Microservice Library for Node",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
@@ -41,10 +41,16 @@
   },
   "keywords": [
     "microservice",
+    "micro",
+    "service",
+    "micro-service",
+    "node",
+    "nodejs",
+    "pubsub",
     "pub",
     "sub",
+    "event-driven",
     "event",
     "driven",
-    "choreograph"
   ]
 }
