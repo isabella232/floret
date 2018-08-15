@@ -1,17 +1,27 @@
 {
   "name": "floret",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Microservice Library for Node",
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
     "test-with-coverage": "nyc --reporter=text mocha ./test/floret-spec.js",
-    "start": ""
+    "start": "node index"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Acxiom/floret.git"
   },
+  "eslintConfig": {
+    "env": {
+      "browser": false,
+      "node": true
+    }
+  },
+  "eslintIgnore": [
+    "test/floret-spec.js",
+    "test/gateway.stubs.js"
+  ],
   "author": "Clint Brown <clint.brown.atx@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
@@ -32,6 +42,9 @@
   "devDependencies": {
     "chai": "^4.0.2",
     "chai-http": "^3.0.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "mocha": "^3.5.3",
     "mocha-cli": "^1.0.1",
     "mockery": "^2.1.0",
@@ -51,6 +64,7 @@
     "sub",
     "event-driven",
     "event",
-    "driven"
+    "driven",
+    "koa"
   ]
 }

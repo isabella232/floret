@@ -1,0 +1,16 @@
+{
+    "extends": "airbnb-base",
+    "rules": {
+      "eslintIgnore": [
+        "floret-spec.js",
+        "gateway.stubs.js"
+      ],
+      "no-underscore-dangle": 0,
+      "no-console": 0,
+      "no-multi-assign": 0,
+      "import/no-dynamic-require": 0,
+      "global-require": 0,
+      "no-plusplus": 0,
+      "no-param-reassign": 0
+    }
+}
