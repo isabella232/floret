@@ -25,6 +25,7 @@
   "author": "Clint Brown <clint.brown.atx@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
+    "floret-gateway-kong": "^0.0.1",
     "ip": "^1.1.5",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
