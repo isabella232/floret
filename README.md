@@ -32,7 +32,8 @@ Floret requires an api gateway for communication features.  Kong API Gateway is 
   [See here](#kong-install) for container-based deployment instructions.
 
 ```
-$ npm i floret
+$ npm i -s floret
+  npm i -s floret-gateway-kong
 ```
 
 ### Get Started with Example Guides and Projects
