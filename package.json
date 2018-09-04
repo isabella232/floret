@@ -4,9 +4,12 @@
   "description": "Microservice Library for Node",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --exit test",
-    "test-with-coverage": "nyc --reporter=text mocha ./test/floret-spec.js",
-    "start": "node index"
+    "test": "npm run test-channel && npm run test-main && npm run test-subscription && exit ",
+    "test-with-coverage": "nyc --reporter=text npm run test",
+    "start": "node index",
+    "test-main": "mocha --exit test/specs/floret-spec.js",
+    "test-channel": "mocha --exit test/specs/floret-channel.spec.js",
+    "test-subscription": "mocha --exit test/specs/floret-subscription.spec.js"
   },
   "repository": {
     "type": "git",
